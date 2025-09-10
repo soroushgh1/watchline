@@ -1,0 +1,28 @@
+.test_panel_btn {
+  padding-left: 50px;
+  padding-right: 50px;
+  border-radius: 5px;
+}
+
+.test_section_title {
+  font-size: 23px;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+.test_section_startbtn {
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.test_section_resultgrid {
+  border: 1.5px solid @theme_fg_color;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.side {
+  background-color: @headerbar_bg_color;
+}

@@ -3,6 +3,7 @@
 **Watchline** is a Full feature Internet Control Center GNOME app. It is currently under active development.
 
 ---
+<img width="512" height="512" alt="watchline_1_optimized(1)" src="https://github.com/user-attachments/assets/075079f6-0daf-4fb1-9b18-6bbc68967178" />
 
 ## Goal
 

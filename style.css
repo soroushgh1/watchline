@@ -4,7 +4,19 @@
   border-radius: 5px;
 }
 
+.usage_panel_btn {
+  padding-left: 50px;
+  padding-right: 50px;
+  border-radius: 5px;
+}
+
 .test_section_title {
+  font-size: 23px;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+.usage_section_title {
   font-size: 23px;
   font-weight: 600;
   margin-bottom: 0px;
@@ -25,4 +37,14 @@
 
 .side {
   background-color: @headerbar_bg_color;
+}
+
+.usage_choose_button {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.usage_startreport_button {
+  padding-left: 40px;
+  padding-right: 40px;
 }

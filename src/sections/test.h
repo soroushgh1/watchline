@@ -2,13 +2,15 @@
 #include "gtkmm/button.h"
 #include "gtkmm/grid.h"
 #include "gtkmm/label.h"
+#include "gtkmm/spinner.h"
+
 #ifndef TEST
 #define TEST
 
 class TestSection {
 public:
   TestSection(Gtk::Grid *win_grid, Gtk::Box *sidebar);
-  void loadLabel(Gtk::Label *label);
+  void loadLabel(Gtk::Label *label, std::string class_name);
   void loadDescription(Gtk::Label *description);
   void loadButton(Gtk::Button *btn);
   void loadResults();
@@ -31,6 +33,8 @@ private:
   Gtk::Label upload_speed;
   Gtk::Label ping;
   Gtk::Label server;
+
+  Gtk::Spinner spinner;
 };
 
 #endif

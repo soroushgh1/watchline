@@ -47,13 +47,13 @@ TestSection::TestSection(Gtk::Grid *win_grid, Gtk::Box *sidebar_ptr) {
   result_grid.set_row_spacing(15);
 }
 
-void TestSection::loadLabel(Gtk::Label *label) {
+void TestSection::loadLabel(Gtk::Label *label, std::string class_name) {
 
   label->set_label("Test Your Internet Performance");
   label->set_halign(Gtk::Align::CENTER);
   label->set_hexpand(true);
-  label->get_style_context()->add_class("test_section_title");
-  label->set_margin_top(70);
+  label->get_style_context()->add_class(class_name);
+  label->set_margin_top(50);
 }
 
 void TestSection::loadDescription(Gtk::Label *description) {
@@ -82,10 +82,24 @@ void TestSection::loadButton(Gtk::Button *btn) {
 }
 
 void TestSection::loadResults() {
-
   std::thread([this] {
+    Glib::signal_idle().connect_once([this] {
+      if (result_grid.get_parent()) {
+        result_grid.unparent();
+      }
+      if (spinner.get_parent()) {
+        spinner.unparent();
+      }
+      spinner.set_hexpand(true);
+      spinner.set_halign(Gtk::Align::CENTER);
+      spinner.set_margin_bottom(140);
+      spinner.set_spinning(true);
+      test_section_grid.attach(spinner, 0, 3);
+    });
+
     json results;
     std::string results_json = exec("speedtest-cli --json");
+    Glib::signal_idle().connect_once([this] { spinner.set_spinning(false); });
     results = json::parse(results_json);
     int upload = results["upload"].get<int>();
     int download = results["download"].get<int>();
@@ -110,21 +124,21 @@ void TestSection::loadResults() {
       this->server.get_style_context()->add_class("test_section_server");
       this->result_grid.get_style_context()->add_class(
           "test_section_resultgrid");
+      test_section_grid.attach(result_grid, 0, 3);
     });
   }).detach();
 }
 
 void TestSection::onPanelBtnClicked() {
 
-  loadLabel(&title);
+  loadLabel(&title, "test_section_title");
   loadDescription(&description);
   loadButton(&start_btn);
 
   for (Gtk::Widget *widget : maingrid->get_children()) {
-    if (widget == sidebar)
-      continue;
-
-    maingrid->remove(*widget);
+    if (widget != sidebar && widget->get_parent()) {
+      maingrid->remove(*widget);
+    }
   }
 
   maingrid->attach(test_section_grid, 1, 0);

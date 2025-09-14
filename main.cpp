@@ -1,4 +1,6 @@
+#include "./src/dialogs/datepicker.h"
 #include "./src/sections/test.h"
+#include "./src/sections/usage.h"
 #include "gdkmm/display.h"
 #include "gtkmm/box.h"
 #include "gtkmm/cssprovider.h"
@@ -21,6 +23,7 @@ public:
     loadCss();
     main_grid.get_style_context()->add_class("main_grid");
 
+    usage_section = std::make_unique<UsageSection>(&main_grid, &panel);
     test_section = std::make_unique<TestSection>(&main_grid, &panel);
   }
 
@@ -46,6 +49,7 @@ private:
   Gtk::Grid main_grid;
   Gtk::Box panel;
   std::unique_ptr<TestSection> test_section;
+  std::unique_ptr<UsageSection> usage_section;
 };
 
 int main(int argc, char *argv[]) {
